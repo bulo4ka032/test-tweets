@@ -6,4 +6,5 @@ justify-content: flex-end;
 margin-left: auto;
 margin-right: auto;
 text-align: center;
+margin-bottom: 0;
 `

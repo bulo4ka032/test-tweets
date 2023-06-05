@@ -1,8 +1,6 @@
-import { Button } from "@mui/material";
-import { Container } from "./LoadMore.styled";
-
+import { Container, ButtonLoadMore } from "./LoadMore.styled";
 const LoadMore = ({onClick, loading}) => {
-    return <Container><Button onClick={onClick} disabled={loading}>{loading ? 'Loading...' : 'Load More'}</Button></Container>
+    return <Container><ButtonLoadMore onClick={onClick} disabled={loading}>{loading ? 'Loading...' : 'Load More'}</ButtonLoadMore></Container>
 }
 
 export default LoadMore;
