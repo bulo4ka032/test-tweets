@@ -3,12 +3,12 @@ import Select from '@mui/material/Select';
 import { useState } from 'react';
 import { Form } from './Filter.styled';
 import FormControl from '@mui/material/FormControl';
+import { SelectChangeEvent } from '@mui/material';
 
-const Filter = ({value = 'Show all', onChange}) => {
-const [filter, setFilter] = useState('')
-const [selectedItem, setSelectedItem] = useState(value)
+const Filter = ({value , setFilter}) => {
+const [selectedItem] = useState(value)
 
-const handleChange = (event) => {
+const handleChange = (event: SelectChangeEvent) => {
     setFilter(event.target.value);
   };
 
@@ -18,16 +18,16 @@ const handleChange = (event) => {
 return <Form>
 <FormControl sx={{ m: 1, minWidth: 120 }}>
   <Select
-    value={filter}
-    onChange={handleChange}
+    value={value}
+    onChange={(event) => handleChange(event)}
     displayEmpty
     inputProps={{ 'aria-label': 'Without label' }}
   >
-    <MenuItem value={'Show all'} onClick={() => onChange(filter, setFilter, setSelectedItem)} disabled={'Show all' === selectedItem} selected={'Show all' === selectedItem}>
-      <em >Show all</em>
+    <MenuItem value={'Show all'}  selected={'Show all' === selectedItem}>
+      <em>Show all</em>
     </MenuItem>
-    <MenuItem value={'Following'} onClick={() => onChange(filter, setFilter, setSelectedItem)} disabled={'Following' === selectedItem} selected={'Following' === selectedItem}>Followings</MenuItem>
-    <MenuItem value={'Follow'} onClick={() => onChange(filter, setFilter, setSelectedItem)} disabled={'Follow' === selectedItem} selected={'Follow' === selectedItem}>Follow</MenuItem>
+    <MenuItem value={'Following'}  disabled={'Following' === selectedItem} selected={'Following' === selectedItem}>Followings</MenuItem>
+    <MenuItem value={'Follow'}  disabled={'Follow' === selectedItem} selected={'Follow' === selectedItem}>Follow</MenuItem>
   </Select>
 </FormControl>
 </Form>

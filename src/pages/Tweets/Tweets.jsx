@@ -33,6 +33,7 @@ const Tweets = () => {
           firstValue =>
             users.some(secondValue => firstValue.id !== secondValue.id)
         );
+
         return [...sumUsers, ...newUsers];
       });
 
@@ -68,13 +69,12 @@ const Tweets = () => {
   };
 
   const handleFilter = (value, handleClose, setSelectedItem) => {
-    console.log(value);
     setFilter(value);
     setSelectedItem(value);
     setPage(1);
     setLimits(3);
     handleClose(value);
-
+    
     if (value === 'Follow') setTotalHits(90 - followings.length);
     if (value === 'Following') setTotalHits(followings.length);
     if (value === 'Show all') setTotalHits(90);
@@ -98,7 +98,7 @@ const Tweets = () => {
     <div>
       <div>
         <GoBack />
-        <Filter value={filter} resetPage={setPage} onChange={handleFilter} />
+        <Filter value={filter} resetPage={setPage} onChange={handleFilter} setFilter={setFilter}  />
       </div>
       {users && <TweetsList users={filteredUsers} onClick={handleFollow} />}
       {totalHits > 3 && (

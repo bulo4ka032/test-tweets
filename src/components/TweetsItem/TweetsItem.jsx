@@ -16,6 +16,7 @@ import {
 
 const TweetsItem = ({ user, onClick }) => {
   const { id, user: name, followers, avatar, tweets, isFollow } = user;
+  
   const roundTweets = Math.round(tweets);
   return (
     <UserItem key={id}>
@@ -28,7 +29,7 @@ const TweetsItem = ({ user, onClick }) => {
       <Container>
         <Name>{name}</Name>
         <DescrT>{roundTweets} Tweets</DescrT>
-        <DescrF>{followers} Followers</DescrF>
+        <DescrF>{followers.toLocaleString('en-US')} Followers</DescrF>
       </Container>
       <Button data-follow={isFollow} onClick={() => onClick(id)}>
         {isFollow ? 'Following' : 'Follow'}
