@@ -8,8 +8,8 @@ import LoadMore from 'components/LoadMore/LoadMore';
 const Tweets = () => {
   const [users, setUsers] = useLocalStorage('users', []);
 //   const [users, setUsers] = useState([]);
-  // const [filter, setFilter] = useLocalStorage('filter', ['Show all']);
-  const [filter, setFilter] = useState('Show all');
+  const [filter, setFilter] = useLocalStorage('filter', ['Show all']);
+//   const [filter, setFilter] = useState('Show all');
   const [followings, setFollowings] = useLocalStorage('followers', []);
 //   const [followings, setFollowings] = useState([]);
   const [page, setPage] = useState(1);
