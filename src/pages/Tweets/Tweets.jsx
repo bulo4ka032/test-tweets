@@ -87,8 +87,8 @@ const Tweets = () => {
 
   const filteredUsers = users
     .filter(user => {
-      if (filter === 'Follow') return !user.isFollow;
-      if (filter === 'Followings') return user.isFollow;
+      if (filter === 'Follow') return user.isFollow;
+      if (filter === 'Followings') return !user.isFollow;
       return user;
     })
     .splice(0, limits);
