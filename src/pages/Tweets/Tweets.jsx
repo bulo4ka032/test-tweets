@@ -17,7 +17,7 @@ const Tweets = () => {
 
   const [page, setPage] = useState(1);
   const [totalHits, setTotalHits] = useState(90);
-  const [limits, setLimits] = useState(3)
+  const [limits, setLimits] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   // const [isOffsetPage, setIsOffsetPage] = useState(false);
 
@@ -40,7 +40,6 @@ const Tweets = () => {
       });
 
       setIsLoading(false);
-      
     };
     fetchUsers();
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,55 +48,64 @@ const Tweets = () => {
   const handleFollow = async userId => {
     setFollowings(prevFollowings => {
       const index = prevFollowings.indexOf(userId);
-      setUsers(prevUsers => prevUsers.map(user => {
-        if (user.id === userId) {
+      setUsers(prevUsers =>
+        prevUsers.map(user => {
+          if (user.id === userId) {
             user.isFollow = !user.isFollow;
-            user.followers = user.isFollow ? user.followers + 1 : user.followers - 1;
-        } 
-        return users;
-      })) 
-      if(index === -1) return [...prevFollowings, userId];
-      prevFollowings.splice(index, 1)
-      return prevFollowings
-
+            user.followers = user.isFollow
+              ? user.followers + 1
+              : user.followers - 1;
+          }
+          return user;
+        })
+      );
+      if (index === -1) {
+        return [...prevFollowings, userId];
+      } else {
+        prevFollowings.splice(index, 1);
+        return [...prevFollowings];
+      }
     });
     const [user] = users.filter(user => user.id === userId);
-    updateUser(userId, user.followers)
+    updateUser(userId, user.followers);
   };
 
   const handleFilter = (value, handleClose, setSelectedItem) => {
-setFilter(value);
-setSelectedItem(value);
-setPage(1);
-setLimits(3);
-handleClose(null);
+    setFilter(value);
+    setSelectedItem(value);
+    setPage(1);
+    setLimits(3);
+    handleClose(null);
 
-if(value === 'Follow') setTotalHits(90 - followings.length);
-if(value === 'Following') setTotalHits(followings.length);
-if(value === 'Show all') setTotalHits(90);
-  }
+    if (value === 'Follow') setTotalHits(90 - followings.length);
+    if (value === 'Following') setTotalHits(followings.length);
+    if (value === 'Show all') setTotalHits(90);
+  };
 
   const handleChangePage = () => {
     setPage(prevPage => prevPage + 1);
     setLimits(prevLimits => prevLimits + 3);
-    setTotalHits(prevTotalHits => prevTotalHits - 3)
-  }
+    setTotalHits(prevTotalHits => prevTotalHits - 3);
+  };
 
-  const filteredUsers = users.filter(user => {
-    if (filter === 'Follow') return !user.isFollow;
-    if (filter === 'Followings') return user.isFollow;
-    return user;
-  }).splice(0, limits)
-  
+  const filteredUsers = users
+    .filter(user => {
+      if (filter === 'Follow') return !user.isFollow;
+      if (filter === 'Followings') return user.isFollow;
+      return user;
+    })
+    .splice(0, limits);
 
   return (
     <div>
       <div>
         <GoBack />
-        <Filter value={filter} resetPage={setPage} onChange={handleFilter}/>
+        <Filter value={filter} resetPage={setPage} onChange={handleFilter} />
       </div>
-      {users && <TweetsList users={filteredUsers} onClick={handleFollow}/>}
-      {totalHits > 3 && <LoadMore onClick={handleChangePage} loading={isLoading}/>}
+      {users && <TweetsList users={filteredUsers} onClick={handleFollow} />}
+      {totalHits > 3 && (
+        <LoadMore onClick={handleChangePage} loading={isLoading} />
+      )}
     </div>
   );
 };
