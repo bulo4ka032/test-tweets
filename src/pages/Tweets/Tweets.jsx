@@ -1,20 +1,17 @@
 import { useEffect, useState } from 'react';
 import { getUsers, updateUser } from 'services/mockAPI';
-// import { useLocalStorage } from "hooks/useLocalStorage"
+import { useLocalStorage } from "hooks/useLocalStorage"
 import GoBack from 'components/GoBack/GoBack';
 import Filter from 'components/Filter/Filter';
 import TweetsList from 'components/TweetsList/TweetsList';
 import LoadMore from 'components/LoadMore/LoadMore';
 const Tweets = () => {
-  // const [users, setUsers] = useLocalStorage('users', []);
-  const [users, setUsers] = useState([]);
-
+  const [users, setUsers] = useLocalStorage('users', []);
+//   const [users, setUsers] = useState([]);
   // const [filter, setFilter] = useLocalStorage('filter', ['Show all']);
   const [filter, setFilter] = useState('Show all');
-
-  // const [followings, setFollowings] = useLocalStorage('followers', []);
-  const [followings, setFollowings] = useState([]);
-
+  const [followings, setFollowings] = useLocalStorage('followers', []);
+//   const [followings, setFollowings] = useState([]);
   const [page, setPage] = useState(1);
   const [totalHits, setTotalHits] = useState(90);
   const [limits, setLimits] = useState(3);
@@ -42,7 +39,7 @@ const Tweets = () => {
       setIsLoading(false);
     };
     fetchUsers();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+        //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const handleFollow = async userId => {
