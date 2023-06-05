@@ -1,7 +1,8 @@
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useState } from 'react';
+import { Form } from './Filter.styled';
+import FormControl from '@mui/material/FormControl';
 
 const Filter = ({value = 'Show all', onChange}) => {
 const [filter, setFilter] = useState('')
@@ -14,7 +15,7 @@ const handleChange = (event) => {
 //   console.log(filter);
 //   console.log(selectedItem);
 
-return <div>
+return <Form>
 <FormControl sx={{ m: 1, minWidth: 120 }}>
   <Select
     value={filter}
@@ -29,7 +30,7 @@ return <div>
     <MenuItem value={'Follow'} onClick={() => onChange(filter, setFilter, setSelectedItem)} disabled={'Follow' === selectedItem} selected={'Follow' === selectedItem}>Follow</MenuItem>
   </Select>
 </FormControl>
-</div>
+</Form>
 }
 
 export default Filter
