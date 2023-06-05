@@ -26,14 +26,14 @@ const Tweets = () => {
       setUsers(prevUsers => {
         const newUsers = usersApi.map(user => {
           return followings.includes(user.id)
-            ? { ...user, isFollow: true }
+            ? {...user, isFollow: true }
             : { ...user, isFollow: false };
         });
-        const sumUsers = prevUsers.filter(
-          firstValue =>
-            !users.some(secondValue => firstValue.id === secondValue.id)
-        );
-        return [...sumUsers, ...newUsers];
+        // const sumUsers = prevUsers.filter(
+        //   firstValue =>
+        //     !users.some(secondValue => firstValue.id === secondValue.id)
+        // );
+        return [...prevUsers, ...newUsers];
       });
 
       setIsLoading(false);
