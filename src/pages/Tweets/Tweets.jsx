@@ -31,7 +31,7 @@ const Tweets = () => {
         });
         const sumUsers = prevUsers.filter(
           firstValue =>
-            !users.some(secondValue => firstValue.id === secondValue.id)
+            users.some(secondValue => firstValue.id !== secondValue.id)
         );
         return [...sumUsers, ...newUsers];
       });
@@ -68,11 +68,12 @@ const Tweets = () => {
   };
 
   const handleFilter = (value, handleClose, setSelectedItem) => {
+    console.log(value);
     setFilter(value);
     setSelectedItem(value);
     setPage(1);
     setLimits(3);
-    handleClose(null);
+    handleClose(value);
 
     if (value === 'Follow') setTotalHits(90 - followings.length);
     if (value === 'Following') setTotalHits(followings.length);
@@ -87,8 +88,8 @@ const Tweets = () => {
 
   const filteredUsers = users
     .filter(user => {
-      if (filter === 'Follow') return user.isFollow;
-      if (filter === 'Followings') return !user.isFollow;
+      if (filter === 'Follow') return !user.isFollow;
+      if (filter === 'Following') return user.isFollow;
       return user;
     })
     .splice(0, limits);
