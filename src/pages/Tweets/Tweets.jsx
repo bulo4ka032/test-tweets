@@ -29,11 +29,11 @@ const Tweets = () => {
             ? {...user, isFollow: true }
             : { ...user, isFollow: false };
         });
-        // const sumUsers = prevUsers.filter(
-        //   firstValue =>
-        //     !users.some(secondValue => firstValue.id === secondValue.id)
-        // );
-        return [...prevUsers, ...newUsers];
+        const sumUsers = prevUsers.filter(
+          firstValue =>
+            !users.some(secondValue => firstValue.id === secondValue.id)
+        );
+        return [...sumUsers, ...newUsers];
       });
 
       setIsLoading(false);
