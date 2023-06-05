@@ -17,7 +17,7 @@ const Tweets = () => {
 
   const [page, setPage] = useState(1);
   const [totalHits, setTotalHits] = useState(90);
-  const [limits, setLimits] = useState()
+  const [limits, setLimits] = useState(3)
   const [isLoading, setIsLoading] = useState(false);
   // const [isOffsetPage, setIsOffsetPage] = useState(false);
 
@@ -26,13 +26,11 @@ const Tweets = () => {
       setIsLoading(true);
 
       const usersApi = await getUsers(page);
-      console.log(users);
-
       setUsers(prevUsers => {
         const newUsers = usersApi.map(user => {
           return followings.includes(user.id)
-            ? { ...usersApi, isFollow: true }
-            : { ...users, isFollow: false };
+            ? { ...user, isFollow: true }
+            : { ...user, isFollow: false };
         });
         const sumUsers = prevUsers.filter(
           firstValue =>
@@ -42,6 +40,7 @@ const Tweets = () => {
       });
 
       setIsLoading(false);
+      
     };
     fetchUsers();
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,14 +80,15 @@ if(value === 'Show all') setTotalHits(90);
   const handleChangePage = () => {
     setPage(prevPage => prevPage + 1);
     setLimits(prevLimits => prevLimits + 3);
-    setTotalHits(prevTotalHits => prevTotalHits - limits)
+    setTotalHits(prevTotalHits => prevTotalHits - 3)
   }
 
   const filteredUsers = users.filter(user => {
     if (filter === 'Follow') return !user.isFollow;
     if (filter === 'Followings') return user.isFollow;
     return user;
-  }).sort((a, b) => a.id - b.id).splice(0, limits)
+  }).splice(0, limits)
+  
 
   return (
     <div>
