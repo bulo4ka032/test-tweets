@@ -7,16 +7,12 @@ import TweetsList from 'components/TweetsList/TweetsList';
 import LoadMore from 'components/LoadMore/LoadMore';
 const Tweets = () => {
   const [users, setUsers] = useLocalStorage('users', []);
-//   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useLocalStorage('filter', ['Show all']);
-//   const [filter, setFilter] = useState('Show all');
   const [followings, setFollowings] = useLocalStorage('followers', []);
-//   const [followings, setFollowings] = useState([]);
   const [page, setPage] = useState(1);
   const [totalHits, setTotalHits] = useState(90);
   const [limits, setLimits] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isOffsetPage, setIsOffsetPage] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {

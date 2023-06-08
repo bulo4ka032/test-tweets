@@ -12,9 +12,6 @@ const handleChange = (event: SelectChangeEvent) => {
     setFilter(event.target.value);
   };
 
-//   console.log(filter);
-//   console.log(selectedItem);
-
 return <Form>
 <FormControl sx={{ m: 1, minWidth: 120 }}>
   <Select
